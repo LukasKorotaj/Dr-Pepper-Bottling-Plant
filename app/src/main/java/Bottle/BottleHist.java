@@ -26,24 +26,16 @@ public class BottleHist {
         return bottle_id;
     }
 
-    public void setBottle_id(int bottle_id) {
-        this.bottle_id = bottle_id;
-    }
-
     public boolean isHealthy() {
         return healthy;
-    }
-
-    public void setIs_good(boolean healthy) {
-        this.healthy = healthy;
     }
 
     public HashMap<CurrentMachine, Float> getStationStats() {
         return stationStats;
     }
 
-    public void setStationStats(HashMap<CurrentMachine, Float> station_stats) {
-        this.stationStats = station_stats;
+    public void regTimeForMachine(CurrentMachine m, float time) {
+        this.stationStats.put(m, time);
     }
 
     public BottleErrors getError() {
@@ -51,6 +43,7 @@ public class BottleHist {
     }
 
     public void setError(BottleErrors error) {
+        this.healthy = false;
         this.error = error;
     }
 }

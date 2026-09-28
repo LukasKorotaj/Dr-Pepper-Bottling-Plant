@@ -29,7 +29,7 @@ flowchart TD
     A -->|Jam| ERR
     B -->|Blowout| ERR
     C -->|Splice Failure| ERR
-    E -->|Underfill| ERR
+    E -->|Underfill or Cap Error| ERR
     F -->|Wrapper Jam| ERR
     G -->|Slip| ERR
 ```

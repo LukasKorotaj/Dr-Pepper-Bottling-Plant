@@ -5,6 +5,12 @@ package Bottle;
  */
 public class Status {
 
+    public enum BottleStatus {
+        INMACHINE,
+        FAIL,
+        DONE,
+    }
+
     public enum CurrentMachine {
         pass;
     }
