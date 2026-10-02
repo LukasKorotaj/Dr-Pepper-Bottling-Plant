@@ -5,5 +5,4 @@ package Interface;
  */
 public interface Output {
 
-
 }
