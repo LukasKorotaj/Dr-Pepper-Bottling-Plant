@@ -9,3 +9,6 @@ build
 
 # Ignore journal
 journal.md
+
+# ignore build files
+*.class
