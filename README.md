@@ -11,4 +11,6 @@ and output volume.
 The program is then able to save configurations to make a 
 shopping list.
 
+![Diagram](./Diagram.png)
+
 <!-- TODO: Make a list of commands once the backend structure is decided -->
