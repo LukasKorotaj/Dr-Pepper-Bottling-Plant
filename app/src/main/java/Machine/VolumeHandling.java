@@ -10,12 +10,16 @@ public interface VolumeHandling {
      * @param ml
      * @return
      */
-    public int supportedVolume(int ml);
+    default int supportedVolume(int ml) {
+        return ml;
+    };
 
     /**
      * Sets the fill speed of the class
      * @param mlPerSecond
      * @return
      */
-    public float fillSpeed(float mlPerSecond);
+    default float fillSpeed(float mlPerSecond) {
+        return mlPerSecond;
+    };
 }
