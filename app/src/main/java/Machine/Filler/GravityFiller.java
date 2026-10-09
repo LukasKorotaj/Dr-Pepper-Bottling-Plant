@@ -3,7 +3,7 @@ package Machine.Filler;
 /**
  * Gravity
  */
-public class Gravity extends Filler{
+public class GravityFiller extends Filler{
 
 
 }

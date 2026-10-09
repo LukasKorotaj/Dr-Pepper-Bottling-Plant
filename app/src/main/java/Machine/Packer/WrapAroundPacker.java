@@ -3,7 +3,7 @@ package Machine.Packer;
 /**
  * WrapAround
  */
-public class WrapAround extends Packer{
+public class WrapAroundPacker extends Packer{
 
 
 }

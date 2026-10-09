@@ -3,7 +3,7 @@ package Machine.Filler;
 /**
  * Pressure
  */
-public class Pressure extends Filler {
+public class PressureFiller extends Filler {
 
 
 }

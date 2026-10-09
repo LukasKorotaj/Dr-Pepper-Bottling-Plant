@@ -3,7 +3,7 @@ package Machine.Packer;
 /**
  * TopLoad
  */
-public class TopLoad extends Packer{
+public class TopLoadPacker extends Packer{
 
 
 }
