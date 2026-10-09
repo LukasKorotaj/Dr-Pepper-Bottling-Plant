@@ -8,12 +8,10 @@ import java.util.List;
 public abstract class MenuEntry {
 
     private String name;
-    private List<String> options;
     private String description;
 
-    protected MenuEntry(String name, String description, List<String> options) {
+    protected MenuEntry(String name, String description) {
         this.name = name;
-        this.options = options;
         this.description = description;
     }
 }
