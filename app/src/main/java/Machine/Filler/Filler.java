@@ -20,18 +20,47 @@ public abstract class Filler extends Machine implements VolumeHandling {
         FLAT,
     }
 
+    // VolumeHandling
+    int supportedVolume;
+    float fillSpeed;
+
     protected Filler(
         String name,
         float surfaceArea,
         float price,
         float outputPerSecond,
-        LiquidProperty liquidProperty
+        LiquidProperty liquidProperty,
+        int supportedVolume,
+        float fillSpeed
     ) {
         super(name, surfaceArea, price, outputPerSecond);
         this.liquidProperty = liquidProperty;
+        this.supportedVolume = supportedVolume;
+        this.fillSpeed = fillSpeed;
     }
 
     public LiquidProperty getLiquidProperty() {
         return liquidProperty;
     }
+
+    @Override
+    public int getSupportedVolume() {
+        return supportedVolume;
+    }
+
+    @Override
+    public void setSupportedVolume(int ml) {
+        this.supportedVolume = ml;
+    }
+
+    @Override
+    public float getFillSpeed() {
+        return fillSpeed;
+    }
+
+    @Override
+    public void setFillSpeed(float mlPerSecond) {
+        this.fillSpeed = mlPerSecond;
+    }
+
 }

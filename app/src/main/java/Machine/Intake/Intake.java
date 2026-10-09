@@ -6,7 +6,7 @@ import Machine.VolumeHandling;
 /**
  * Intake
  */
-public class Intake extends Machine implements VolumeHandling {
+public abstract class Intake extends Machine implements VolumeHandling {
 
     MaterialType materialType;
 
@@ -25,6 +25,10 @@ public class Intake extends Machine implements VolumeHandling {
         GLASS,
     }
 
+    // VolumeHandling
+    private int supportedVolume;
+    private float fillSpeed;
+
     /**
      *
      * @param name
@@ -38,13 +42,37 @@ public class Intake extends Machine implements VolumeHandling {
         float surfaceArea,
         float price,
         float outputPerSecond,
-        MaterialType materialType
+        MaterialType materialType,
+        int supportedVolume,
+        float fillSpeed
     ) {
         super(name, surfaceArea, price, outputPerSecond);
         this.materialType = materialType;
+        this.supportedVolume = supportedVolume;
+        this.fillSpeed = fillSpeed;
     }
 
     public MaterialType getMaterialType() {
         return materialType;
+    }
+
+    @Override
+    public int getSupportedVolume() {
+        return supportedVolume;
+    }
+
+    @Override
+    public void setSupportedVolume(int ml) {
+        this.supportedVolume = ml;
+    }
+
+    @Override
+    public float getFillSpeed() {
+        return fillSpeed;
+    }
+
+    @Override
+    public void setFillSpeed(float mlPerSecond) {
+        this.fillSpeed = mlPerSecond;
     }
 }

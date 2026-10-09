@@ -9,8 +9,18 @@ public class Blower extends Intake {
         String name,
         float surfaceArea,
         float price,
-        float outputPerSecond
+        float outputPerSecond,
+        int supportedVolume,
+        float fillSpeed
     ) {
-        super(name, surfaceArea, price, outputPerSecond, MaterialType.PET);
+        super(
+            name,
+            surfaceArea,
+            price,
+            outputPerSecond,
+            MaterialType.PET,
+            supportedVolume,
+            fillSpeed
+        );
     }
 }
