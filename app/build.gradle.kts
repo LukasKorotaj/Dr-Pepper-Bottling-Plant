@@ -23,9 +23,6 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
-
-    // Lanterna
-    implementation("com.googlecode.lanterna:lanterna:3.1.2")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
