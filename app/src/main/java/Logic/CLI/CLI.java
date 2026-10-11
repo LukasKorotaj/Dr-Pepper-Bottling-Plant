@@ -1,11 +1,8 @@
 package Logic.CLI;
 
 import Logic.Logic;
-
-import java.awt.Menu;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -14,46 +11,8 @@ import java.util.Scanner;
 public class CLI {
 
     private final Logic logic;
+    private final Map<Integer, MenuEntry> menu;
     private final Scanner in = new Scanner(System.in);
-
-    // Record for describing menu entries.
-    public record MenuEntry(String name, String description, Runnable run) {
-        // Convenience method.
-        // Wanted to name it "run()"
-        // but the compiler complains
-        public void execute() {
-            run.run();
-        }
-
-        public String getName() {
-            return this.name;
-        }
-
-        public String getDescription() {
-            return this.description;
-        }
-    }
-
-    /**
-    *
-    * @return Map of menu entries.
-    * The order DOES matter.
-    */
-    private Map<Integer, MenuEntry> menu() {
-        Map<Integer, MenuEntry> map = new LinkedHashMap<>();
-
-        List<MenuEntry> menuEntries = List.of(
-            new MenuEntry("Test", "Test1", null),
-            new MenuEntry("Test", "Test2", null),
-            new MenuEntry("Test", "Test3", null)
-        );
-
-        for (int i = 0; i < menuEntries.size(); i++) {
-            map.put(i + 1, menuEntries.get(i));
-        }
-
-        return map;
-    }
 
     private void drawMenu(Map<Integer, MenuEntry> menu, int padding) {
         StringBuilder sb = new StringBuilder();
@@ -75,8 +34,37 @@ public class CLI {
         System.out.println(sb);
     }
 
-    public CLI(Logic logic) {
+    private void menuChooser(Scanner scanner) {
+        System.out.print("Command to run: ");
+        String input = null;
+
+        while (input == null || input != "q") {
+            String token = null;
+
+            // Try catch for the scanner
+            try {
+                token = scanner.next();
+            } catch (NoSuchElementException e) {
+                System.err.println("No input!");
+            } catch (IllegalStateException e) {
+                System.err.println("Scanner was closed??");
+            }
+
+            try {
+                Integer.parseInt(token);
+            } catch (NumberFormatException e) {
+                System.err.println("Input is not a number!");
+                //TODO: Add help message
+            }
+
+            input = token;
+
+        }
+    }
+
+    public CLI(Logic logic, Map<Integer, MenuEntry> menu) {
         this.logic = logic;
+        this.menu = menu;
     }
 
     private String banner = """
@@ -100,5 +88,6 @@ public class CLI {
      */
     public void init() {
         System.out.println(banner);
+        drawMenu(menu, 20);
     }
 }
