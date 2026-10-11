@@ -55,10 +55,24 @@ public class CLI {
         return map;
     }
 
-    // Wrong, Change it
-    private void drawMenu(List<MenuEntry> menu) {
-        Map<Integer, MenuEntry> map = new LinkedHashMap<>();
+    private void drawMenu(Map<Integer, MenuEntry> menu, int padding) {
+        StringBuilder sb = new StringBuilder();
 
+        for (int i = 1; i <= menu.size(); i++) {
+            MenuEntry value = menu.get(i);
+            sb.append(i + ". ");
+
+            int toPad = padding - value.getName().length();
+            if (toPad < 1) {
+                throw new IllegalArgumentException("Padding too Small!");
+            }
+
+            sb.append(value.getName() + ".".repeat(toPad));
+            sb.append(value.getDescription());
+            sb.append("\n");
+        }
+
+        System.out.println(sb);
     }
 
     public CLI(Logic logic) {
