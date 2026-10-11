@@ -42,6 +42,9 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
+gradle.startParameter.consoleOutput = ConsoleOutput.Plain
+gradle.startParameter.logLevel = LogLevel.QUIET
+
 tasks.named<JavaExec>("run") {
     standardInput = System.`in`
 }

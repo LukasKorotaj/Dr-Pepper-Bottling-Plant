@@ -14,7 +14,12 @@ public class CLI {
     private final Map<Integer, MenuEntry> menu;
     private final Scanner in = new Scanner(System.in);
 
-    private void drawMenu(Map<Integer, MenuEntry> menu, int padding) {
+    public CLI(Logic logic, Map<Integer, MenuEntry> menu) {
+        this.logic = logic;
+        this.menu = menu;
+    }
+
+    private void drawMenu(int padding) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 1; i <= menu.size(); i++) {
@@ -29,42 +34,42 @@ public class CLI {
             sb.append(value.getName() + ".".repeat(toPad));
             sb.append(value.getDescription());
             sb.append("\n");
-        }
 
+        }
         System.out.println(sb);
     }
 
-    private void menuChooser(Scanner scanner) {
+    private void menuChooser() {
         System.out.print("Command to run: ");
-        String input = null;
 
-        while (input == null || input != "q") {
-            String token = null;
-
-            // Try catch for the scanner
+        while (true) {
+            String token;
             try {
-                token = scanner.next();
+                token = in.next();
             } catch (NoSuchElementException e) {
                 System.err.println("No input!");
-            } catch (IllegalStateException e) {
-                System.err.println("Scanner was closed??");
+                return;
             }
 
+            if (token.equals("q")) {
+                return;
+            }
+
+            int choice;
             try {
-                Integer.parseInt(token);
+                choice = Integer.parseInt(token);
             } catch (NumberFormatException e) {
                 System.err.println("Input is not a number!");
-                //TODO: Add help message
+                continue;
             }
 
-            input = token;
-
+            MenuEntry entry = menu.get(choice);
+            if (entry == null) {
+                System.err.println("No such option: " + choice);
+                continue;
+            }
+            entry.execute();
         }
-    }
-
-    public CLI(Logic logic, Map<Integer, MenuEntry> menu) {
-        this.logic = logic;
-        this.menu = menu;
     }
 
     private String banner = """
@@ -88,6 +93,7 @@ public class CLI {
      */
     public void init() {
         System.out.println(banner);
-        drawMenu(menu, 20);
+        drawMenu(20);
+        menuChooser();
     }
 }
