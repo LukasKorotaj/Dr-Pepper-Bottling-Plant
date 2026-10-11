@@ -16,11 +16,19 @@ public class Main {
      * @return Map of menu entries.
      * The order DOES matter.
      */
+
+    private static void motivationalMessage() {
+        System.out.println("""
+        “If there is no struggle, there is no progress.”
+        — Frederick Douglass
+        """);
+    }
+
     private static Map<Integer, MenuEntry> menu() {
         Map<Integer, MenuEntry> map = new LinkedHashMap<>();
 
         List<MenuEntry> menuEntries = List.of(
-            new MenuEntry("Test", "Test1", null),
+            new MenuEntry("Motivate", "Gives you a motivational message", Main::motivationalMessage),
             new MenuEntry("Test", "Test2", null),
             new MenuEntry("Test", "Test3", null)
         );
@@ -33,7 +41,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Logic logic = new Logic();
         CLI cli = new CLI(menu());
 
         cli.init();
