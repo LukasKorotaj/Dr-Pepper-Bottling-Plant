@@ -1,6 +1,5 @@
 package Logic.CLI;
 
-import Logic.Logic;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -10,12 +9,10 @@ import java.util.Scanner;
  */
 public class CLI {
 
-    private final Logic logic;
     private final Map<Integer, MenuEntry> menu;
     private final Scanner in = new Scanner(System.in);
 
-    public CLI(Logic logic, Map<Integer, MenuEntry> menu) {
-        this.logic = logic;
+    public CLI( Map<Integer, MenuEntry> menu) {
         this.menu = menu;
     }
 

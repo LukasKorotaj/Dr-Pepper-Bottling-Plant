@@ -34,7 +34,7 @@ public class Main {
 
     public static void main(String[] args) {
         Logic logic = new Logic();
-        CLI cli = new CLI(logic, menu());
+        CLI cli = new CLI(menu());
 
         cli.init();
     }
