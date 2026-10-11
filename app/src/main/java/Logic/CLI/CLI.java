@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Handling user input and styling.
+ * Handling user input and stylinglogic, .
  */
 public class CLI {
 
@@ -36,35 +36,45 @@ public class CLI {
         System.out.println(sb);
     }
 
-    private void menuChooser() {
-        System.out.print("Command to run: ");
+    private String menuHelp = """
+    Type the number of the desired command to choose it.
+    Type "q" to quit the program.
+    """;
 
+    private void menuChooser() {
         while (true) {
-            String token;
+            System.out.print("Command to run: ");
+
+            String line;
             try {
-                token = in.next();
+                line = in.nextLine().trim();
             } catch (NoSuchElementException e) {
-                System.err.println("No input!");
+                System.out.println("No input!");
                 return;
             }
 
-            if (token.equals("q")) {
+            if (line.isEmpty()) {
+                continue;
+            }
+
+            if (line.equalsIgnoreCase("q")) {
                 return;
             }
 
             int choice;
             try {
-                choice = Integer.parseInt(token);
+                choice = Integer.parseInt(line);
             } catch (NumberFormatException e) {
-                System.err.println("Input is not a number!");
+                System.out.println("Input is not a number!");
                 continue;
             }
 
             MenuEntry entry = menu.get(choice);
             if (entry == null) {
-                System.err.println("No such option: " + choice);
+                System.out.println("No such option: " + choice);
                 continue;
             }
+
             entry.execute();
         }
     }
