@@ -11,26 +11,38 @@ import java.util.Map;
  */
 public class Main {
 
+    private static void importShoppingList() {
+        System.out.println("""
+        This option will be able to import a shopping list for editing
+        or calculating if its optimal.
+        """);
+    }
+
+    private static void calculate() {
+        System.out.println("""
+        Calculates the best machine composition
+        given the users constraints.
+        """);
+    }
+
+    private static void newBottlePlant() {
+        System.out.println("""
+        Creates a shopping list.
+        """);
+    }
+
     /**
      *
      * @return Map of menu entries.
      * The order DOES matter.
      */
-
-    private static void motivationalMessage() {
-        System.out.println("""
-        “If there is no struggle, there is no progress.”
-        — Frederick Douglass
-        """);
-    }
-
     private static Map<Integer, MenuEntry> menu() {
         Map<Integer, MenuEntry> map = new LinkedHashMap<>();
 
         List<MenuEntry> menuEntries = List.of(
-            new MenuEntry("Motivate", "Gives you a motivational message", Main::motivationalMessage),
-            new MenuEntry("Test", "Test2", null),
-            new MenuEntry("Test", "Test3", null)
+            new MenuEntry("Calculate", "Finds the cheapest viable option", Main::calculate),
+            new MenuEntry("Import", "Imports an already existing config", Main::importShoppingList),
+            new MenuEntry("New", "Begin a new project", Main::newBottlePlant)
         );
 
         for (int i = 0; i < menuEntries.size(); i++) {

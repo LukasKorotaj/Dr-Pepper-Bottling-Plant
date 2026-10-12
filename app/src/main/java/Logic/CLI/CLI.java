@@ -33,6 +33,8 @@ public class CLI {
             sb.append("\n");
 
         }
+
+        sb.append("Type 'q' to quit\n");
         System.out.println(sb);
     }
 
