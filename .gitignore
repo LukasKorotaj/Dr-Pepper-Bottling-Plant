@@ -12,3 +12,6 @@ journal.md
 
 # ignore build files
 *.class
+
+# Ignore project files
+*.project
