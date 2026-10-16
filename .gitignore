@@ -24,3 +24,6 @@ app/bin/
 
 # Ignore settings
 .settings
+
+# Ignore the output list
+list.txt

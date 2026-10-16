@@ -12,10 +12,11 @@ import java.util.List;
 public class CLI {
 
     private final Map<Integer, MenuEntry> menuEntries;
-    private final Scanner in = new Scanner(System.in);
+    private final Scanner in;
 
-    public CLI(List<MenuEntry> menuList) {
+    public CLI(List<MenuEntry> menuList, Scanner in) {
         this.menuEntries = menu(menuList);
+        this.in = in;
     }
 
     private void drawMenu(int padding) {
