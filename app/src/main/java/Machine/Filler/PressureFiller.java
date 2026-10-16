@@ -23,4 +23,16 @@ public class PressureFiller extends Filler {
             fillSpeed
         );
     }
+
+    @Override
+    public String category() {
+        return "Filler";
+    }
+
+    @Override
+    public String describe() {
+        return String.format(
+            "Pressure filler for carbonated drinks - %d ml at %.1f ml/s",
+            getSupportedVolume(), getFillSpeed());
+    }
 }

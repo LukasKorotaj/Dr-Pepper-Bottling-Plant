@@ -32,4 +32,16 @@ public abstract class Machine {
     public float getOutputPerSecond() {
         return outputPerSecond;
     }
+
+    /**
+     * The production stage this machine belongs to. Every concrete machine
+     * supplies its own value, so iterating a mixed collection and calling
+     * this runs the right implementation for each object.
+     */
+    public abstract String category();
+
+    /**
+     * One-line, human-readable description specific to the machine type.
+     */
+    public abstract String describe();
 }

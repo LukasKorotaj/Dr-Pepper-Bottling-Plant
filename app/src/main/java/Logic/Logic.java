@@ -11,6 +11,7 @@ import Machine.Filler.Filler;
 import Machine.Intake.Intake;
 import Machine.Machine;
 import Machine.Packer.Packer;
+import Machine.VolumeHandling;
 
 /**
  * Logic
@@ -98,6 +99,112 @@ public class Logic {
         if (answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes")) {
             save(best, desired, area, budget);
         }
+    }
+
+    /**
+     * Lists every machine in the catalogue, iterating the mixed list
+     * through the shared Machine reference so category() and describe()
+     * dispatch to each concrete subclass.
+     */
+    public void listMachines() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%nMachine catalogue (%d)%n%n", catalogue.size()));
+        appendTableHeader(sb);
+        for (Machine m : catalogue) {
+            appendMachine(sb, 1, m);
+        }
+        System.out.println(sb);
+    }
+
+    /**
+     * Filters the catalogue by stage and by minimum output and maximum
+     * price, using values read from the user rather than any fixed key.
+     */
+    public void searchMachines() {
+        System.out.print("Stage [Intake/Filler/Packer] (blank = all): ");
+        String stage = in.nextLine().trim();
+        float minOutput = prompt(in, "Minimum output (bottles/s, 0 = any): ");
+        float maxPrice = prompt(in, "Maximum price (0 = any): ");
+
+        StringBuilder sb = new StringBuilder();
+        int found = 0;
+        for (Machine m : catalogue) {
+            boolean stageMatches = stage.isEmpty() || m.category().equalsIgnoreCase(stage);
+            boolean outputMatches = minOutput <= 0 || m.getOutputPerSecond() >= minOutput;
+            boolean priceMatches = maxPrice <= 0 || m.getPrice() <= maxPrice;
+
+            if (stageMatches && outputMatches && priceMatches) {
+                if (found == 0) {
+                    appendTableHeader(sb);
+                }
+                appendMachine(sb, 1, m);
+                found++;
+            }
+        }
+
+        System.out.println();
+        if (found == 0) {
+            System.out.println("No machines match the given filters.\n");
+        } else {
+            System.out.println(sb);
+        }
+    }
+
+    /**
+     * Aggregates the catalogue: per-stage counts, total value, average
+     * output and the cheapest, most expensive and fastest machines.
+     */
+    public void showStatistics() {
+        int intakes = 0;
+        int fillers = 0;
+        int packers = 0;
+        float sumPrice = 0.0f;
+        float sumOutput = 0.0f;
+
+        Machine cheapest = null;
+        Machine dearest = null;
+        Machine fastest = null;
+
+        for (Machine m : catalogue) {
+            sumPrice += m.getPrice();
+            sumOutput += m.getOutputPerSecond();
+
+            if (cheapest == null || m.getPrice() < cheapest.getPrice()) {
+                cheapest = m;
+            }
+            if (dearest == null || m.getPrice() > dearest.getPrice()) {
+                dearest = m;
+            }
+            if (fastest == null || m.getOutputPerSecond() > fastest.getOutputPerSecond()) {
+                fastest = m;
+            }
+
+            switch (m.category()) {
+                case "Intake" -> intakes++;
+                case "Filler" -> fillers++;
+                case "Packer" -> packers++;
+                default -> { }
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%nCatalogue statistics (%d)%n", catalogue.size()));
+        sb.append(String.format("  By stage      : Intake %d, Filler %d, Packer %d%n",
+            intakes, fillers, packers));
+        sb.append(String.format("  Total value   : %,.0f%n", sumPrice));
+
+        if (!catalogue.isEmpty()) {
+            sb.append(String.format("  Average output: %.1f bottles/s%n",
+                sumOutput / catalogue.size()));
+            sb.append(String.format("  Cheapest      : %s (%,.0f)%n",
+                cheapest.getName(), cheapest.getPrice()));
+            sb.append(String.format("  Most expensive: %s (%,.0f)%n",
+                dearest.getName(), dearest.getPrice()));
+            sb.append(String.format("  Fastest       : %s (%,.1f bottles/s)%n",
+                fastest.getName(), fastest.getOutputPerSecond()));
+        }
+
+        System.out.println(sb.append("\n"));
     }
 
     /**
@@ -208,11 +315,31 @@ public class Logic {
         sb.append(String.format("Budget        : %,.0f%n%n", budget));
 
         sb.append("Machines to purchase\n\n");
-        sb.append(String.format("  %-9s %-20s %12s %8s %8s%n",
-            "STAGE", "MACHINE", "PRICE", "AREA", "OUT/S"));
-        appendMachine(sb, "Intake", s.lines(), s.intake());
-        appendMachine(sb, "Filler", s.lines(), s.filler());
-        appendMachine(sb, "Packer", s.lines(), s.packer());
+        appendTableHeader(sb);
+
+        // One mixed list of machines handled through the shared Machine
+        // reference: category() and describe() dispatch to each concrete
+        // subclass, so the printed stage label and detail line are the
+        // version that object actually is.
+        List<Machine> stages = List.of(s.intake(), s.filler(), s.packer());
+        for (Machine stage : stages) {
+            appendMachine(sb, s.lines(), stage);
+        }
+
+        // Intake and filler both implement VolumeHandling; handled here
+        // through that one interface reference regardless of concrete type.
+        sb.append("\n");
+        for (Machine stage : stages) {
+            sb.append("  ").append(stage.category()).append(": ")
+                .append(stage.describe()).append("\n");
+        }
+        int bottleSize = -1;
+        for (VolumeHandling vh : List.<VolumeHandling>of(s.intake(), s.filler())) {
+            bottleSize = bottleSize < 0
+                ? vh.getSupportedVolume()
+                : Math.min(bottleSize, vh.getSupportedVolume());
+        }
+        sb.append(String.format("%n  Line bottle size: %,d ml%n", bottleSize));
 
         sb.append("\n").append(thin).append("\n");
         sb.append(String.format("Per line     : %,.1f m^2, %,.0f, %,.1f bottles/s%n",
@@ -234,10 +361,19 @@ public class Logic {
         return sb.toString();
     }
 
-    private void appendMachine(StringBuilder sb, String stage, int qty, Machine m) {
+    private void appendMachine(StringBuilder sb, int qty, Machine m) {
         sb.append(String.format("  %-9s %-20s %,12.0f %7.1f m^2 %6.1f /s%n",
-            stage, qty + "x " + m.getName(),
+            m.category(), qty + "x " + m.getName(),
             m.getPrice(), m.getSurfaceArea(), m.getOutputPerSecond()));
+    }
+
+    /**
+     * Column headers shared by the shopping list and the browse/search
+     * tables.
+     */
+    private void appendTableHeader(StringBuilder sb) {
+        sb.append(String.format("  %-9s %-20s %12s %8s %8s%n",
+            "STAGE", "MACHINE", "PRICE", "AREA", "OUT/S"));
     }
 
     /**

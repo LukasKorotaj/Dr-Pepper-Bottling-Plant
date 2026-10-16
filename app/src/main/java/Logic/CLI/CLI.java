@@ -123,7 +123,7 @@ public class CLI {
      */
     public void init() {
         System.out.println(banner);
-        drawMenu(20);
+        drawMenu(30);
         menuChooser();
     }
 }

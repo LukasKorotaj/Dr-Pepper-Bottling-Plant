@@ -23,4 +23,15 @@ public class Blower extends Intake {
             fillSpeed
         );
     }
+
+    @Override
+    public String category() {
+        return "Intake";
+    }
+
+    @Override
+    public String describe() {
+        return String.format(
+            "Blower moulding PET preforms up to %d ml", getSupportedVolume());
+    }
 }

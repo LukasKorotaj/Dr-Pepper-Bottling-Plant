@@ -2,6 +2,7 @@ import Data.MachineLoader;
 import Logic.CLI.CLI;
 import Logic.CLI.MenuEntry;
 import Logic.Logic;
+import Machine.Machine;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,13 +19,40 @@ public class Main {
         // fight over the buffered standard input.
         Scanner in = new Scanner(System.in);
 
-        Logic logic = new Logic(MachineLoader.load(dataFile()), in);
+        List<Machine> catalogue;
+        try {
+            catalogue = MachineLoader.load(dataFile());
+        } catch (IllegalStateException e) {
+            System.out.println("Could not find the machine catalogue: " + e.getMessage());
+            return;
+        } catch (IllegalArgumentException e) {
+            System.out.println("The machine catalogue contains an invalid entry: "
+                + e.getMessage());
+            return;
+        }
+
+        Logic logic = new Logic(catalogue, in);
 
         List<MenuEntry> menuEntries = List.of(
             new MenuEntry(
                 "Calculate",
                 "Find the ideal setup for your output, area and budget.",
                 logic::run
+            ),
+            new MenuEntry(
+                "Browse",
+                "List every machine in the catalogue.",
+                logic::listMachines
+            ),
+            new MenuEntry(
+                "Search",
+                "Filter machines by stage, minimum output and maximum price.",
+                logic::searchMachines
+            ),
+            new MenuEntry(
+                "Statistics",
+                "Show totals, per-stage counts and extremes over the catalogue.",
+                logic::showStatistics
             )
         );
 

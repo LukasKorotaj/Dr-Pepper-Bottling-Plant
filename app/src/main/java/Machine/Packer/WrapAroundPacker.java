@@ -13,4 +13,14 @@ public class WrapAroundPacker extends Packer {
     ) {
         super(name, surfaceArea, price, outputPerSecond, false);
     }
+
+    @Override
+    public String category() {
+        return "Packer";
+    }
+
+    @Override
+    public String describe() {
+        return "Wrap-around packer (fixed size)";
+    }
 }

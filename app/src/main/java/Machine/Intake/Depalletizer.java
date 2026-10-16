@@ -25,6 +25,17 @@ public class Depalletizer extends Intake {
         );
     }
 
+    @Override
+    public String category() {
+        return "Intake";
+    }
+
+    @Override
+    public String describe() {
+        return String.format(
+            "Depalletizer unloading ready-made %s containers", getMaterialType());
+    }
+
     private static MaterialType validateMaterial(MaterialType materialType) {
         if (materialType == MaterialType.PET) {
             throw new IllegalArgumentException(

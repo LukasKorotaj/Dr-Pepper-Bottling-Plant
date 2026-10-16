@@ -13,4 +13,14 @@ public class TopLoadPacker extends Packer {
     ) {
         super(name, surfaceArea, price, outputPerSecond, true);
     }
+
+    @Override
+    public String category() {
+        return "Packer";
+    }
+
+    @Override
+    public String describe() {
+        return "Top-load packer (easy size switching)";
+    }
 }

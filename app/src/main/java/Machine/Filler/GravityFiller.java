@@ -23,4 +23,16 @@ public class GravityFiller extends Filler {
             fillSpeed
         );
     }
+
+    @Override
+    public String category() {
+        return "Filler";
+    }
+
+    @Override
+    public String describe() {
+        return String.format(
+            "Gravity filler for still liquids - %d ml at %.1f ml/s",
+            getSupportedVolume(), getFillSpeed());
+    }
 }
