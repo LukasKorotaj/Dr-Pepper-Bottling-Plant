@@ -23,6 +23,9 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+
+    // Json parsing
+    implementation("tools.jackson.core:jackson-databind:3.2.3")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
