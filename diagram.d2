@@ -1,0 +1,63 @@
+Machine: Abstract\nMachine{
+    shape: class
+}
+
+PressureFiller: Pressure Filler {
+    shape: class
+}
+
+Blower: {
+    shape: class
+}
+
+Depalletizer: {
+    shape: class
+}
+
+Intake: Abstract\nIntake{
+    shape: class
+}
+
+Packer: Abstract\nPacker{
+    shape: class
+}
+
+TopLoadPacker: Top Load Packer {
+    shape: class
+}
+
+WrapAroundPacker: Wrap Around Packer {
+    shape: class
+}
+
+VolumeHandling: <<Interface>>\nVolume Handling {
+    shape: class
+}
+
+Filler: Abstract\nFiller {
+    shape: class
+}
+
+GravityFiller: Gravity Filler {
+    shape: class
+}
+
+Filler -> Machine
+Intake -> Machine
+Packer -> Machine
+
+GravityFiller -> Filler
+PressureFiller -> Filler
+
+Depalletizer -> Intake
+Blower -> Intake
+
+TopLoadPacker -> Packer
+WrapAroundPacker -> Packer
+
+Filler -> VolumeHandling: implements {
+    style.stroke-dash: 3
+}
+Intake -> VolumeHandling: implements {
+    style.stroke-dash: 3
+}
