@@ -15,3 +15,6 @@ journal.md
 
 # Ignore project files
 *.project
+
+# Ignore tmp qwen folder
+.qwen
