@@ -3,24 +3,26 @@ package Logic.CLI;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Handling user input and stylinglogic, .
  */
 public class CLI {
 
-    private final Map<Integer, MenuEntry> menu;
+    private final Map<Integer, MenuEntry> menuEntries;
     private final Scanner in = new Scanner(System.in);
 
-    public CLI( Map<Integer, MenuEntry> menu) {
-        this.menu = menu;
+    public CLI(List<MenuEntry> menuList) {
+        this.menuEntries = menu(menuList);
     }
 
     private void drawMenu(int padding) {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 1; i <= menu.size(); i++) {
-            MenuEntry value = menu.get(i);
+        for (int i = 1; i <= menuEntries.size(); i++) {
+            MenuEntry value = menuEntries.get(i);
             sb.append(i + ". ");
 
             int toPad = padding - value.getName().length();
@@ -68,17 +70,35 @@ public class CLI {
                 choice = Integer.parseInt(line);
             } catch (NumberFormatException e) {
                 System.out.println("Input is not a number!");
+                System.out.println(menuHelp);
                 continue;
             }
 
-            MenuEntry entry = menu.get(choice);
+            MenuEntry entry = menuEntries.get(choice);
+
             if (entry == null) {
                 System.out.println("No such option: " + choice);
+                System.out.println(menuHelp);
                 continue;
             }
 
             entry.execute();
         }
+    }
+
+    /**
+     *
+     * @return Map of menu entries.
+     * The order DOES matter.
+     */
+    private Map<Integer, MenuEntry> menu(List<MenuEntry> menuEntries) {
+        Map<Integer, MenuEntry> map = new LinkedHashMap<>();
+
+        for (int i = 0; i < menuEntries.size(); i++) {
+            map.put(i + 1, menuEntries.get(i));
+        }
+
+        return map;
     }
 
     private String banner = """
