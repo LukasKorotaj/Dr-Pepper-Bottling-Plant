@@ -18,7 +18,7 @@ public abstract class Intake extends Machine implements VolumeHandling {
      * a machine to bring it to volume.
      * MaterialType
      */
-    protected enum MaterialType {
+    public enum MaterialType {
         CAN,
         PLASTIC,
         PET,

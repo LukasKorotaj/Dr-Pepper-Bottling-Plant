@@ -5,7 +5,7 @@ package Machine.Packer;
  */
 public class TopLoadPacker extends Packer {
 
-    protected TopLoadPacker(
+    public TopLoadPacker(
         String name,
         float surfaceArea,
         float price,

@@ -5,7 +5,7 @@ package Machine.Packer;
  */
 public class WrapAroundPacker extends Packer {
 
-    protected WrapAroundPacker(
+    public WrapAroundPacker(
         String name,
         float surfaceArea,
         float price,

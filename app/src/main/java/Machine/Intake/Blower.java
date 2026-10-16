@@ -5,7 +5,7 @@ package Machine.Intake;
  */
 public class Blower extends Intake {
 
-    protected Blower(
+    public Blower(
         String name,
         float surfaceArea,
         float price,

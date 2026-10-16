@@ -1,192 +1,152 @@
 {
-  "filler": [
-    {
-      "gravity": [
-        {
-          "name": "Gravity MK1",
-          "surfacearea": 10.0,
-          "price": 50000,
-          "outputpersecond": 10.0,
-          "liquidproperty": "FLAT",
-          "supportedvolume": 2.0,
-          "fillspeed": 1.0
-        },
-        {},
-        {
-          "name": "Gravity MK2",
-          "surfacearea": 15.0,
-          "price": 100000,
-          "outputpersecond": 20.0,
-          "liquidproperty": "FLAT",
-          "supportedvolume": 2.0,
-          "fillspeed": 2.0
-        },
-        {
-          "name": "Gravity MK3",
-          "surfacearea": 30.0,
-          "price": 300000,
-          "outputpersecond": 25.0,
-          "liquidproperty": "FLAT",
-          "supportedvolume": 2.0,
-          "fillspeed": 5.0
-        }
-      ]
-    },
-    {
-      "pressure": [
-        {
-          "name": "Pressure MK1",
-          "surfacearea": 10.0,
-          "price": 100000,
-          "outputpersecond": 10.0,
-          "liquidproperty": "CARBONATED",
-          "supportedvolume": 2.0,
-          "fillspeed": 1.0
-        },
-        {},
-        {
-          "name": "Pressure MK2",
-          "surfacearea": 15.0,
-          "price": 200000,
-          "outputpersecond": 20.0,
-          "liquidproperty": "CARBONATED",
-          "supportedvolume": 2.0,
-          "fillspeed": 2.0
-        },
-        {
-          "name": "Pressure MK3",
-          "surfacearea": 30.0,
-          "price": 600000,
-          "outputpersecond": 25.0,
-          "liquidproperty": "CARBONATED",
-          "supportedvolume": 2.0,
-          "fillspeed": 5.0
-        }
-      ]
-    }
-  ],
-  "intake": [
-    {
-      "depalletizer": [
-        {
-          "name": "Depalletizer MK1",
-          "surfacearea": 10.0,
-          "price": 10000,
-          "outputpersecond": 10.0,
-          "materialtype": ["PLASTIC", "GLASS", "CAN"],
-          "supportedvolume": 2.0,
-          "fillspeed": null
-        },
-        {},
-        {
-          "name": "Depalletizer MK2",
-          "surfacearea": 15.0,
-          "price": 20000,
-          "outputpersecond": 20.0,
-          "materialtype": ["PLASTIC", "GLASS", "CAN"],
-          "supportedvolume": 2.0,
-          "fillspeed": null
-        },
-        {
-          "name": "Depalletizer MK3",
-          "surfacearea": 30.0,
-          "price": 60000,
-          "outputpersecond": 25.0,
-          "materialtype": ["PLASTIC", "GLASS", "CAN"],
-          "supportedvolume": 2.0,
-          "fillspeed": null
-        }
-      ]
-    },
-    {
-      "blower": [
-        {
-          "name": "Blower MK1",
-          "surfacearea": 10.0,
-          "price": 20000,
-          "outputpersecond": 10.0,
-          "materialtype": "PET",
-          "supportedvolume": 0.5,
-          "fillspeed": 0.5
-        },
-        {},
-        {
-          "name": "Blower MK2",
-          "surfacearea": 15.0,
-          "price": 40000,
-          "outputpersecond": 20.0,
-          "materialtype": "PET",
-          "supportedvolume": 1.0,
-          "fillspeed": 1.0
-        },
-        {
-          "name": "Blower MK3",
-          "surfacearea": 30.0,
-          "price": 120000,
-          "outputpersecond": 25.0,
-          "materialtype": "PET",
-          "supportedvolume": 2.0,
-          "fillspeed": 2.0
-        }
-      ]
-    }
-  ],
-  "packer": [
-    {
-      "topload": [
-        [
-          {
-            "name": "Top Loader MK1",
-            "surfacearea": 10.0,
-            "price": 2000,
-            "outputpersecond": 10.0,
-            "easyswitch": true
-          },
-          {},
-          {
-            "name": "Top Loader MK2",
-            "surfacearea": 10.0,
-            "price": 4000,
-            "outputpersecond": 20.0,
-            "easyswitch": true
-          },
-          {
-            "name": "Top Loader MK3",
-            "surfacearea": 30.0,
-            "price": 12000,
-            "outputpersecond": 25.0,
-            "easyswitch": true
-          }
-        ]
-      ]
-    },
-    {
-      "wraparound": [
-        [
-          {
-            "name": "WAP MK1",
-            "surfacearea": 10.0,
-            "price": 6000,
-            "outputpersecond": 20.0,
-            "easyswitch": false
-          },
-          {},
-          {
-            "name": "WAP MK2",
-            "surfacearea": 10.0,
-            "price": 12000,
-            "outputpersecond": 40.0,
-            "easyswitch": false
-          },
-          {
-            "name": "WAP MK3",
-            "surfacearea": 20.0,
-            "price": 36000,
-            "outputpersecond": 50.0,
-            "easyswitch": false
-          }
-        ]
-      ]
-    }
-  ]
+  "filler": {
+    "gravity": [
+      {
+        "name": "Gravity MK1",
+        "surfacearea": 10.0,
+        "price": 50000,
+        "outputpersecond": 10.0,
+        "supportedvolume": 2000,
+        "fillspeed": 1.0
+      },
+      {
+        "name": "Gravity MK2",
+        "surfacearea": 15.0,
+        "price": 100000,
+        "outputpersecond": 20.0,
+        "supportedvolume": 2000,
+        "fillspeed": 2.0
+      },
+      {
+        "name": "Gravity MK3",
+        "surfacearea": 30.0,
+        "price": 300000,
+        "outputpersecond": 25.0,
+        "supportedvolume": 2000,
+        "fillspeed": 5.0
+      }
+    ],
+    "pressure": [
+      {
+        "name": "Pressure MK1",
+        "surfacearea": 10.0,
+        "price": 100000,
+        "outputpersecond": 10.0,
+        "supportedvolume": 2000,
+        "fillspeed": 1.0
+      },
+      {
+        "name": "Pressure MK2",
+        "surfacearea": 15.0,
+        "price": 200000,
+        "outputpersecond": 20.0,
+        "supportedvolume": 2000,
+        "fillspeed": 2.0
+      },
+      {
+        "name": "Pressure MK3",
+        "surfacearea": 30.0,
+        "price": 600000,
+        "outputpersecond": 25.0,
+        "supportedvolume": 2000,
+        "fillspeed": 5.0
+      }
+    ]
+  },
+  "intake": {
+    "depalletizer": [
+      {
+        "name": "Depalletizer MK1",
+        "surfacearea": 10.0,
+        "price": 10000,
+        "outputpersecond": 10.0,
+        "materialtype": "PLASTIC",
+        "supportedvolume": 2000
+      },
+      {
+        "name": "Depalletizer MK2",
+        "surfacearea": 15.0,
+        "price": 20000,
+        "outputpersecond": 20.0,
+        "materialtype": "PLASTIC",
+        "supportedvolume": 2000
+      },
+      {
+        "name": "Depalletizer MK3",
+        "surfacearea": 30.0,
+        "price": 60000,
+        "outputpersecond": 25.0,
+        "materialtype": "PLASTIC",
+        "supportedvolume": 2000
+      }
+    ],
+    "blower": [
+      {
+        "name": "Blower MK1",
+        "surfacearea": 10.0,
+        "price": 20000,
+        "outputpersecond": 10.0,
+        "supportedvolume": 500,
+        "fillspeed": 0.5
+      },
+      {
+        "name": "Blower MK2",
+        "surfacearea": 15.0,
+        "price": 40000,
+        "outputpersecond": 20.0,
+        "supportedvolume": 1000,
+        "fillspeed": 1.0
+      },
+      {
+        "name": "Blower MK3",
+        "surfacearea": 30.0,
+        "price": 120000,
+        "outputpersecond": 25.0,
+        "supportedvolume": 2000,
+        "fillspeed": 2.0
+      }
+    ]
+  },
+  "packer": {
+    "topload": [
+      {
+        "name": "Top Loader MK1",
+        "surfacearea": 10.0,
+        "price": 2000,
+        "outputpersecond": 10.0
+      },
+      {
+        "name": "Top Loader MK2",
+        "surfacearea": 10.0,
+        "price": 4000,
+        "outputpersecond": 20.0
+      },
+      {
+        "name": "Top Loader MK3",
+        "surfacearea": 30.0,
+        "price": 12000,
+        "outputpersecond": 25.0
+      }
+    ],
+    "wraparound": [
+      {
+        "name": "WAP MK1",
+        "surfacearea": 10.0,
+        "price": 6000,
+        "outputpersecond": 20.0
+      },
+      {
+        "name": "WAP MK2",
+        "surfacearea": 10.0,
+        "price": 12000,
+        "outputpersecond": 40.0
+      },
+      {
+        "name": "WAP MK3",
+        "surfacearea": 20.0,
+        "price": 36000,
+        "outputpersecond": 50.0
+      }
+    ]
+  }
 }

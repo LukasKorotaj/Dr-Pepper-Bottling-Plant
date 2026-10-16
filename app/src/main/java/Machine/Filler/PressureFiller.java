@@ -5,7 +5,7 @@ package Machine.Filler;
  */
 public class PressureFiller extends Filler {
 
-    protected PressureFiller(
+    public PressureFiller(
         String name,
         float surfaceArea,
         float price,
