@@ -21,3 +21,6 @@ journal.md
 
 # Ignore bin
 app/bin/
+
+# Ignore settings
+.settings
